@@ -3,11 +3,15 @@ variable "region" {
 }
 
 variable "vpc_id" {
-  default = ""
+  default = "vpc-XXXXXXXXXXXXXXXXX"
 }
 
 variable "subnet_ids" {
-  default = []
+  default = [
+    "subnet-XXXXXXXXXXXXXXXXX",
+    "subnet-XXXXXXXXXXXXXXXXX",
+    "subnet-XXXXXXXXXXXXXXXXX",
+  ]
 }
 
 variable "cluster_name" {
@@ -20,4 +24,18 @@ variable "cluster_version" {
 
 variable "instance_types" {
   default = ["t3.medium", "t3a.medium"]
+}
+
+variable "aws_auth_users" {
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+
+  default = [{
+    rolearn  = "arn:aws:iam::XXXXXXXXXXXX:user/test"
+    username = "test"
+    groups   = ["system:masters"]
+  }]
 }

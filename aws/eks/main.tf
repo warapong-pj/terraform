@@ -39,13 +39,7 @@ module "eks" {
 
   create_aws_auth_configmap = false
   manage_aws_auth_configmap = true
-  aws_auth_users = [
-    {
-      rolearn  = "arn:aws:iam::XXXXXXXXXXXX:user/test"
-      username = "test"
-      groups   = ["system:masters"]
-    },
-  ]
+  aws_auth_users = var.aws_auth_users
 
   eks_managed_node_groups = {
     generic = {
@@ -54,6 +48,27 @@ module "eks" {
       desired_size = 1
 
       instance_types = var.instance_types
+      disk_size      = 50
+
+      tags = {
+        node_type = "generic"
+      }
     }
   }
+}
+
+module "eks_roles" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+  version = "5.33.0"
+
+  create_role = true
+
+  role_name = "${var.cluster_name}-cluster-roles"
+
+  provider_url = module.eks.oidc_provider
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AdministratorAccess"
+  ]
+  number_of_role_policy_arns = 1
 }
