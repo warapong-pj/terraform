@@ -5,7 +5,3 @@ variable "region" {
 variable "bucket_name" {
   default = "bucket-name"
 }
-
-variable "bucket_policy" {
-  default = "bucket-policy"
-}
