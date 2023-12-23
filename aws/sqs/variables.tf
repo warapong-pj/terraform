@@ -5,7 +5,3 @@ variable "region" {
 variable "queue_name" {
   default = "queue-name"
 }
-
-variable "queeu_policy" {
-  default = "queue-policy"
-}

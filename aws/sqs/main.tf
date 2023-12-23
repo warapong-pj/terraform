@@ -13,8 +13,8 @@ module "iam_sqs_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
   version = "5.33.0"
 
-  name        = var.queeu_policy
-  path        = "/"
+  name = "${module.sqs.queue_name}-policy"
+  path = "/"
 
   policy = <<EOF
 {
@@ -23,11 +23,12 @@ module "iam_sqs_policy" {
 		{
 			"Effect": "Allow",
 			"Action": [
-				"sqs:*"
+				"s3:*"
 			],
-			"Resource": "arn:aws:sqs:ap-southeast-1:XXXXXXXXXXXX:lms-import-data"
+			"Resource": "${module.sqs.queue_arn}/*"
 		}
 	]
 }
 EOF
 }
+
