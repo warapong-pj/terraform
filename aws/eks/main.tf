@@ -34,12 +34,18 @@ module "eks" {
   }
   create_cloudwatch_log_group = false
 
-  vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_ids
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
 
   create_aws_auth_configmap = false
   manage_aws_auth_configmap = true
-  aws_auth_users = var.aws_auth_users
+  aws_auth_users = [
+    {
+      rolearn  = "arn:aws:iam::XXXXXXXXXXXX:user/test"
+      username = "test"
+      groups   = ["system:masters"]
+    }
+  ]
 
   eks_managed_node_groups = {
     generic = {
