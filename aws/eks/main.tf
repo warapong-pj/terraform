@@ -14,10 +14,6 @@ provider "kubernetes" {
   }
 }
 
-module "vpc" {
-  source = "../vpc"
-}
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.21.0"
@@ -38,8 +34,8 @@ module "eks" {
   }
   create_cloudwatch_log_group = false
 
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
+  vpc_id     = var.vpc_id
+  subnet_ids = var.subnet_ids
 
   create_aws_auth_configmap = false
   manage_aws_auth_configmap = true
