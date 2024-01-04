@@ -1,0 +1,5 @@
+# ignore terraform module directory and state file
+**/.terraform
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
