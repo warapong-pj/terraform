@@ -1,4 +1,9 @@
 services:
+  redis:
+    image: redis:7.4.9-alpine
+    ports:
+      - "6379:6379"
+
   ministack:
     image: ministackorg/ministack:1.3.31
     ports:
