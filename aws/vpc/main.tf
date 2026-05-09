@@ -4,15 +4,15 @@ provider "aws" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "5.4.0"
+  version = "6.6.1"
 
   name = var.vpc_name
   cidr = var.cidr
 
   # two-tier architecture
-  azs              = var.az
-  public_subnets   = var.public_subnets
-  private_subnets  = var.private_subnets
+  azs             = var.az
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
 
   enable_nat_gateway     = true
   single_nat_gateway     = true
@@ -31,4 +31,3 @@ module "vpc" {
 
   map_public_ip_on_launch = true
 }
-
