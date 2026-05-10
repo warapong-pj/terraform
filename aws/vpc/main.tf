@@ -1,34 +1,27 @@
 provider "aws" {
-  region = var.region
+  region     = var.region
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "5.4.0"
+  version = "6.6.1"
 
   name = var.vpc_name
   cidr = var.cidr
 
-  # two-tier architecture
+  # three-tier architecture
   azs              = var.az
   public_subnets   = var.public_subnets
   private_subnets  = var.private_subnets
+  database_subnets = var.database_subnets
+  intra_subnets    = var.intra_subnets
 
+  # nat per az
   enable_nat_gateway     = true
-  single_nat_gateway     = true
-  one_nat_gateway_per_az = false
+  single_nat_gateway     = false
+  one_nat_gateway_per_az = true
 
-  # # three-tier architecture
-  # azs              = var.az
-  # public_subnets   = var.public_subnets
-  # private_subnets  = var.private_subnets
-  # database_subnets = var.database_subnets
-
-  # # nat per az
-  # enable_nat_gateway     = true
-  # single_nat_gateway     = false
-  # one_nat_gateway_per_az = true
-
-  map_public_ip_on_launch = true
+  tags = var.tags
 }
-

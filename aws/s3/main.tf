@@ -2,19 +2,18 @@ provider "aws" {
   region = var.region
 }
 
-module "s3" {
+module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "3.15.1"
+  version = "5.13.0"
 
-  bucket = "${var.bucket_name}"
+  bucket = var.bucket_name
 }
 
-module "iam_s3_policy" {
+module "iam" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.33.0"
+  version = "6.6.0"
 
-  name = "${module.s3.s3_bucket_id}-policy"
-  path = "/"
+  name = "${var.bucket_name}-policy"
 
   policy = <<EOF
 {
@@ -25,7 +24,7 @@ module "iam_s3_policy" {
 			"Action": [
 				"s3:*"
 			],
-			"Resource": "${module.s3.s3_bucket_arn}/*"
+			"Resource": "${module.s3_bucket.s3_bucket_arn}/*"
 		}
 	]
 }
