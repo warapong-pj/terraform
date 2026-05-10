@@ -2,6 +2,14 @@ variable "region" {
   default = "ap-southeast-1"
 }
 
+variable "access_key" {
+  default = ""
+}
+
+variable "secret_key" {
+  default = ""
+}
+
 variable "vpc_name" {
   default = "vpc"
 }
@@ -24,4 +32,15 @@ variable "private_subnets" {
 
 variable "database_subnets" {
   default = ["10.0.6.0/24", "10.0.7.0/24", "10.0.8.0/24"]
+}
+
+variable "intra_subnets" {
+  default = ["10.0.9.0/24", "10.0.10.0/24", "10.0.11.0/24"]
+}
+
+variable "tags" {
+  default = {
+    "ManageByTerraform" : "True"
+    "Environment" : "POC"
+  }
 }
