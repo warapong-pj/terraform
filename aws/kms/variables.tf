@@ -3,11 +3,11 @@ variable "region" {
 }
 
 variable "access_key" {
-  default = "test"
+  default = ""
 }
 
 variable "secret_key" {
-  default = "test"
+  default = ""
 }
 
 variable "tags" {
