@@ -1,5 +1,7 @@
 provider "aws" {
-  region = var.region
+  region     = var.region
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 module "s3_bucket" {
@@ -7,6 +9,8 @@ module "s3_bucket" {
   version = "5.13.0"
 
   bucket = var.bucket_name
+
+  tags = var.tags
 }
 
 module "iam" {
@@ -29,4 +33,6 @@ module "iam" {
 	]
 }
 EOF
+
+  tags = var.tags
 }
