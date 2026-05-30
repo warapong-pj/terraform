@@ -2,8 +2,16 @@ variable "region" {
   default = "ap-southeast-1"
 }
 
+variable "access_key" {
+  default = ""
+}
+
+variable "secret_key" {
+  default = ""
+}
+
 variable "ec2_name" {
-  default = "ec2"
+  default = "demo"
 }
 
 variable "ec2_instance_type" {
@@ -18,14 +26,17 @@ variable "subnet_id" {
   default = "subnet-XXXXXXXXXXXXXXXXX"
 }
 
-variable "key_pair" {
-  default = "key-pair"
-}
-
 variable "volume_type" {
   default = "gp3"
 }
 
 variable "volume_size" {
   default = "20"
+}
+
+variable "tags" {
+  default = {
+    "ManageByTerraform" : "True"
+    "Environment" : "POC"
+  }
 }

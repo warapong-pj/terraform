@@ -2,12 +2,28 @@ variable "region" {
   default = "ap-southeast-1"
 }
 
-variable "rds_name" {
-  default = "rds"
+variable "access_key" {
+  default = ""
+}
+
+variable "secret_key" {
+  default = ""
 }
 
 variable "vpc_id" {
   default = "vpc-XXXXXXXXXXXXXXXXX"
+}
+
+variable "subnets_id" {
+  default = [
+    "subnet-XXXXXXXXXXXXXXXXX",
+    "subnet-XXXXXXXXXXXXXXXXX",
+    "subnet-XXXXXXXXXXXXXXXXX",
+  ]
+}
+
+variable "identifier" {
+  default = "demo"
 }
 
 variable "engine" {
@@ -15,27 +31,42 @@ variable "engine" {
 }
 
 variable "engine_version" {
-  default = "14"
+  default = "17.1"
 }
 
 variable "family" {
-  default = "postgres14"
+  default = "postgres17"
 }
 
 variable "instance_class" {
-  default = "db.t3.medium"
+  default = "db.t4g.medium"
+}
+
+variable "database" {
+  default = "poc-db"
+}
+
+variable "username" {
+  default   = "postgres"
+  sensitive = true
+}
+
+variable "password" {
+  default   = "passw0rd"
+  sensitive = true
 }
 
 variable "allocated_storage" {
   default = 20
 }
 
-variable "rds_username" {
-  default   = "postgres"
-  sensitive = true
+variable "max_allocated_storage" {
+  default = 40
 }
 
-variable "rds_password" {
-  default   = "XXXXXXXXXXXXXXXX"
-  sensitive = true
+variable "tags" {
+  default = {
+    "ManageByTerraform" : "True"
+    "Environment" : "POC"
+  }
 }
