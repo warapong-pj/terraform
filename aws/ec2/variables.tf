@@ -11,7 +11,7 @@ variable "secret_key" {
 }
 
 variable "ec2_name" {
-  default = "ec2"
+  default = "demo"
 }
 
 variable "ec2_instance_type" {
