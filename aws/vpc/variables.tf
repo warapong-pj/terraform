@@ -11,11 +11,11 @@ variable "secret_key" {
 }
 
 variable "vpc_name" {
-  default = "vpc"
+  default = "demo"
 }
 
 variable "cidr" {
-  default = "10.0.0.0/16"
+  default = "10.0.0.0/20"
 }
 
 variable "az" {
