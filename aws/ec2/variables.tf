@@ -2,6 +2,14 @@ variable "region" {
   default = "ap-southeast-1"
 }
 
+variable "access_key" {
+  default = ""
+}
+
+variable "secret_key" {
+  default = ""
+}
+
 variable "ec2_name" {
   default = "ec2"
 }
@@ -16,10 +24,6 @@ variable "vpc_id" {
 
 variable "subnet_id" {
   default = "subnet-XXXXXXXXXXXXXXXXX"
-}
-
-variable "key_pair" {
-  default = "key-pair"
 }
 
 variable "volume_type" {
