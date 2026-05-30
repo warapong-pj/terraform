@@ -33,3 +33,10 @@ variable "volume_type" {
 variable "volume_size" {
   default = "20"
 }
+
+variable "tags" {
+  default = {
+    "ManageByTerraform" : "True"
+    "Environment" : "POC"
+  }
+}

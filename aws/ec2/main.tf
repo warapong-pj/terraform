@@ -68,4 +68,6 @@ module "ec2_instance" {
   #     volume_size = var.volume_size
   #   },
   # ]
+
+  tags = var.tags
 }
