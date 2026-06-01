@@ -6,7 +6,7 @@ provider "aws" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "5.1.0"
+  version = "5.3.1"
 
   name   = var.ec2_name
   vpc_id = var.vpc_id
@@ -38,29 +38,34 @@ module "key_pair" {
   create_private_key = true
 }
 
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amzn-ami-hvm-*-x86_64-gp2"]
-  }
+resource "aws_ssm_parameter" "amazon_linux_ami" {
+  name  = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+  type  = "String"
+  value = "ami-12345678"
 }
 
 module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "6.0.0"
+  version = "6.4.0"
+
 
   name = var.ec2_name
-  ami  = data.aws_ami.amazon_linux.id
+  ami  = aws_ssm_parameter.amazon_linux_ami.value
 
   instance_type          = var.ec2_instance_type
   key_name               = module.key_pair.key_pair_name
   monitoring             = false
+  create_iam_instance_profile = false
   create_security_group  = false
   vpc_security_group_ids = [module.security_group.security_group_id]
   subnet_id              = var.subnet_id
+
+  metadata_options = {
+    http_endpoint               = "enabled"
+    http_tokens                 = "optional"   # allows IMDSv1, avoids the metadata API call
+    http_put_response_hop_limit = 1
+    instance_metadata_tags      = "disabled"
+  }
 
   # root_block_device = [
   #   {
@@ -68,6 +73,8 @@ module "ec2_instance" {
   #     volume_size = var.volume_size
   #   },
   # ]
+
+  depends_on = [aws_ssm_parameter.amazon_linux_ami]
 
   tags = var.tags
 }

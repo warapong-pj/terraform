@@ -39,7 +39,7 @@ module "rds" {
   engine         = var.engine
   engine_version = var.engine_version
 
-  apply_immediately = true
+  apply_immediately           = true
   allow_major_version_upgrade = true
 
   instance_class = var.instance_class
@@ -57,9 +57,9 @@ module "rds" {
   password_wo                 = var.password
   password_wo_version         = 1
 
-  allocated_storage = var.allocated_storage
+  allocated_storage     = var.allocated_storage
   max_allocated_storage = var.max_allocated_storage
-  kms_key_id        = "arn:aws:kms:ap-southeast-1:000000000000:key/dcb40258-7f41-4940-9067-1bef84b7f7fe"
+  kms_key_id            = var.kms_key_arn
 
   deletion_protection = false
 

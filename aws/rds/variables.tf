@@ -43,7 +43,7 @@ variable "instance_class" {
 }
 
 variable "database" {
-  default = "poc-db"
+  default = "demo-db"
 }
 
 variable "username" {
@@ -62,6 +62,10 @@ variable "allocated_storage" {
 
 variable "max_allocated_storage" {
   default = 40
+}
+
+variable "kms_key_arn" {
+  default = "arn:aws:kms:ap-southeast-1:000000000000:key/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }
 
 variable "tags" {

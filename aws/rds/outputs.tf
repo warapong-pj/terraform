@@ -3,7 +3,7 @@ output "rds_engine" {
 }
 
 output "rds_address" {
-    value = module.rds.db_instance_address
+  value = module.rds.db_instance_address
 }
 
 output "rds_endpoint" {

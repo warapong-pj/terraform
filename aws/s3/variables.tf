@@ -11,7 +11,11 @@ variable "secret_key" {
 }
 
 variable "bucket_name" {
-  default = "bucket-name"
+  default = "demo-bucket"
+}
+
+variable "kms_key_id" {
+  default = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }
 
 variable "tags" {
