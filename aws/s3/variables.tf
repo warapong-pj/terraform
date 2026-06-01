@@ -11,7 +11,7 @@ variable "secret_key" {
 }
 
 variable "bucket_name" {
-  default = "bucket-name"
+  default = "demo-bucket"
 }
 
 variable "tags" {
