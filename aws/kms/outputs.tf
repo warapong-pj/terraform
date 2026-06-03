@@ -37,3 +37,11 @@ output "kms_elasticache_id" {
 output "kms_elasticache_arn" {
   value = module.kms_elasticache.key_arn
 }
+
+output "kms_secrets_manager_id" {
+  value = module.kms_secrets_manager.key_id
+}
+
+output "kms_secrets_manager_arn" {
+  value = module.kms_secrets_manager.key_arn
+}
