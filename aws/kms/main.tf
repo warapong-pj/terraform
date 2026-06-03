@@ -73,3 +73,17 @@ module "kms_elasticache" {
 
   tags = var.tags
 }
+
+module "kms_secrets_manager" {
+  source  = "terraform-aws-modules/kms/aws"
+  version = "4.2.0"
+
+  description = "Secrets Manager KMS Key"
+
+  deletion_window_in_days = 30
+
+  enable_key_rotation     = true
+  rotation_period_in_days = 365
+
+  tags = var.tags
+}
