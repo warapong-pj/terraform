@@ -39,11 +39,15 @@ module "rds" {
   engine         = var.engine
   engine_version = var.engine_version
 
+  instance_class = var.instance_class
+  family         = var.family
+
+  maintenance_window = "sat:23:00-sun:03:00"
   apply_immediately           = true
   allow_major_version_upgrade = true
 
-  instance_class = var.instance_class
-  family         = var.family
+  backup_window      = "03:00-06:00"
+  backup_retention_period = 7
 
   vpc_security_group_ids = [module.security_group.security_group_id]
 
