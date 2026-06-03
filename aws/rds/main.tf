@@ -46,6 +46,9 @@ module "rds" {
   apply_immediately           = true
   allow_major_version_upgrade = true
 
+  backup_window      = "03:00-06:00"
+  backup_retention_period = 7
+
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   multi_az               = true
