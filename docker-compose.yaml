@@ -18,3 +18,17 @@ services:
   #   image: floci/floci-gcp:0.9.0-compat
   #   ports:
   #     - "4588:4588"
+
+  ui:
+    image: floci/floci-ui:0.5.0
+    ports:
+      - 4500:4500
+    environment:
+      - FLOCI_ENDPOINT=http://floci:4566
+      # - FLOCI_AZURE_ENDPOINT=http://localhost:4577
+      # - FLOCI_AZURE_ACCOUNT_NAME=devstoreaccount1
+      # - FLOCI_GCP_ENDPOINT=http://localhost:4588
+      # - FLOCI_GCP_PROJECT=floci-local
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
